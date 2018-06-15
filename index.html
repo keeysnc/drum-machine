@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Minimal Drum Kit</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+</head>
+<body>
+
+
+  <div class="container">
+    <div class="col-lg-12">
+      <h1> DRUM MACHINE </h1>
+      <h4>Minimal Phased Drum Machine</h4>
+    </div>
+  </div>
+
+<div class="container drum-container">
+  <div class="keys col-lg-12">
+    <div data-key="65" class="key col-lg-3">
+    <div class="col-lg-12 drum-pad">
+      <div class="keyboard">A</div>
+      <span class="sound">clap</span>
+    </div>
+    </div>
+    <div data-key="83" class="key col-lg-3">
+    <div class="col-lg-12 drum-pad">
+      <div class="keyboard">S</div>
+      <span class="sound">hihat</span>
+    </div>
+    </div>
+    <div data-key="68" class="key col-lg-3">
+    <div class="col-lg-12 drum-pad">
+      <div class="keyboard">D</div>
+      <span class="sound">kick</span>
+    </div>
+    </div>
+    <div data-key="70" class="key col-lg-3">
+    <div class="col-lg-12 drum-pad">
+      <div class="keyboard">F</div>
+      <span class="sound">openhat</span>
+    </div>
+    </div>
+    <div data-key="71" class="key col-lg-3">
+    <div class="col-lg-12 drum-pad">
+      <div class="keyboard">G</div>
+      <span class="sound">boom</span>
+    </div>
+    </div>
+    <div data-key="74" class="key col-lg-3">
+    <div class="col-lg-12 drum-pad">
+      <div class="keyboard">J</div>
+      <span class="sound">snare</span>
+    </div>
+    </div>
+    <div data-key="75" class="key col-lg-3">
+    <div class="col-lg-12 drum-pad">
+      <div class="keyboard">K</div>
+      <span class="sound">tom</span>
+    </div>
+    </div>
+    <div data-key="76" class="key col-lg-3">
+    <div class="col-lg-12 drum-pad">
+      <div class="keyboard">L</div>
+      <span class="sound">tink</span>
+    </div>
+  </div>
+</div>
+</div>
+
+  <audio data-key="65" src="sounds/clap.wav"></audio>
+  <audio data-key="83" src="sounds/hihat.wav"></audio>
+  <audio data-key="68" src="sounds/kick.wav"></audio>
+  <audio data-key="70" src="sounds/openhat.wav"></audio>
+  <audio data-key="71" src="sounds/boom.wav"></audio>
+  <audio data-key="74" src="sounds/snare.wav"></audio>
+  <audio data-key="75" src="sounds/tom.wav"></audio>
+  <audio data-key="76" src="sounds/tink.wav"></audio>
+
+<script
+  src="http://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script>
+
+function removeTransition(e) {
+  if (e.propertyName !== 'transform') return;
+  e.target.classList.remove('playing');
+}
+
+function playSound(e) {
+  const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+  const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+  if (!audio) return;
+
+  key.classList.add('playing');
+  audio.currentTime = 0;
+  audio.play();
+}
+
+const keys = Array.from(document.querySelectorAll('.key'));
+keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+window.addEventListener('keydown', playSound);
+</script>
+
+
+</body>
+</html>
