@@ -1,2 +1,2 @@
 # drum-machine
-Created a vanilla js drum machine using Metro Boomin's drum kit. 
+Created a vanilla js drum machine using pre-made drum kit. 
